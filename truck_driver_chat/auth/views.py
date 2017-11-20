@@ -31,7 +31,7 @@ class Login(web.View):
     @aiohttp_jinja2.template('auth/login.html')
     async def get(self):
         session = await get_session(self.request)
-        if session.get('user'):
+        if session.get('user_id'):
             redirect(self.request, 'dashboard')
         return {'context': 'Please enter email'}
 
@@ -56,8 +56,8 @@ class SignIn(web.View):
     @aiohttp_jinja2.template('auth/signin.html')
     async def get(self):
         session = await get_session(self.request)
-        if session.get('user'):
-            redirect(self.request, 'main')
+        if session.get('user_id'):
+            redirect(self.request, 'dashboard')
         fields = {
             'email': {'type': 'text', 'label': 'Email', 'placeholder': 'you@example.com'},
             'password': {'type': 'password', 'label': 'Password', 'placeholder': 'at least 6 symbols'},
@@ -84,6 +84,6 @@ class SignIn(web.View):
 
 async def logout(request):
     session = await get_session(request)
-    if session.get('user'):
-        del session['user']
+    if session.get('user_id'):
+        del session['user_id']
     redirect(request, 'login')
