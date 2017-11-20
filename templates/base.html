@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap@next/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="{{ app.router.static.url(filename='css/style.css') }}"/>
+
+    <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script type="text/javascript"
+            src="//cdn.rawgit.com/mikeric/rivets/master/dist/rivets.bundled.min.js"></script>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+<footer>
+    <script src="{{ app.router.static.url(filename='js/app.js') }}"></script>
+
+
+
+    {% block footer %}
+
+    {% endblock %}
+</footer>
+</html>

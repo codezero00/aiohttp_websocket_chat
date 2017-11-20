@@ -1,0 +1,10 @@
+*.egg-info
+*.pot
+*.py[co]
+docs/_build/
+.idea
+debugging.py
+pycharm-debug.egg
+.gitattributes
+.env
+alembic.ini

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+{% block title %} {{ title }}{% endblock %}
+
+{% block content %}
+    <h3>{{ user.name }}'s dashboard <a href="/logout">Logout</a></h3>
+    <hr>
+
+
+    <div class="row" id="app-chat-container">
+
+        <drivers-list-item class="col-md-2" data_external="data"></drivers-list-item>
+        <div rv-hide="data.active_chat" class="col-md-10">
+            <b><----- Click on chat for messaging and user info</b>
+        </div>
+
+
+        <div rv-show="data.active_chat" class="message-wrap col-md-6">
+            <div id="chat-window" class="msg-wrap">
+                {#                <div class="alert alert-info msg-date">#}
+                {#                    <strong>Today</strong>#}
+                {#                </div>#}
+                <div rv-each-msg="data.chat_messages" class="media msg">
+                    <div class="media-body">
+                        {#                        <small class="pull-right time"><i class="fa fa-clock-o"></i> 12:10am</small>#}
+
+                        <small class="col-lg-10">
+                            {msg.text}
+                        </small>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="send-wrap ">
+
+                <textarea rv-value="data.current_message" class="form-control send-message" rows="3"
+                          placeholder="Write a reply..."></textarea>
+
+            </div>
+            <div class="btn-panel">
+                <a href="#" rv-on-click="close_chat" class=" col-lg-3 btn   send-message-btn " role="button"><i
+                        class="fa fa-close"></i> Close chat</a>
+                <a rv-on-click="send_msg" href="#" class=" col-lg-4 text-right btn   send-message-btn pull-right"
+                   role="button"><i
+                        class="fa fa-plus"></i> Send Message</a>
+            </div>
+        </div>
+        <div rv-show="data.active_chat" class="col-md-4">
+            <h3>{ data.active_chat.dst_client.name }</h3>
+            <p>
+                email : { data.active_chat.dst_client.email }
+            </p>
+            <p>
+                phone : { data.active_chat.dst_client.phone }
+            </p>
+            <p>
+                birthdate : { data.active_chat.dst_client.birthdate }
+            </p>
+            <hr>
+            <div class="col-md-12">
+                <div rv-each-scheditem="data.active_chat.dst_client.schedule">
+                    {scheditem.i}- <span rv-show="scheditem.in_work">In work</span> <span class="free-sched"
+                                                                                          rv-hide="scheditem.in_work">free</span>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock %}
